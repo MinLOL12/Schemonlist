@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# Environment — NEVER commit real values
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Supabase CLI local state
+supabase/.branches
+supabase/.temp
+
+# Logs / OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/

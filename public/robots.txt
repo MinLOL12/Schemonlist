@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /profile
+Disallow: /submit
+Disallow: /auth
+
+# Everything public is indexable; private areas are noindex'd by the app itself.
