@@ -1,0 +1,34 @@
+# GitHub Actions CI for Schemonlist.
+#
+# TO ENABLE: copy this file to .github/workflows/ci.yml in the repository root.
+# (It ships outside .github/workflows because the token that generated this
+# branch was not allowed to push workflow files. Adding the file through the
+# GitHub web UI or a token with "workflows" permission enables it.)
+#
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Schema + RLS security tests
+        run: npm run test:schema
+      - name: Production build
+        run: npm run build
+        env:
+          # A production build without Supabase credentials renders the
+          # "configuration required" screen — that is the expected CI path.
+          NEXT_TELEMETRY_DISABLED: "1"
